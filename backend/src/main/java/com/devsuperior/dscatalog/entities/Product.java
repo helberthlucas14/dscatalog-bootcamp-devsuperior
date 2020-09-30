@@ -48,10 +48,6 @@ public class Product implements Serializable {
 		this.date = date;
 	}
 
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -98,6 +94,11 @@ public class Product implements Serializable {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	
+	public Set<Category> getCategories() {
+		return categories;
 	}
 
 	@Override
