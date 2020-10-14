@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ReactComponent as ArrowIcon } from '../../../../core/assets/images/arrow.svg';
-import { ReactComponent as ProductImage } from '../../../../core/assets/images/product.svg';
 import ProductPrice from '../../../../core/components/ProductPrice';
+import { Product } from '../../../../core/types/Products';
+import { makeRequest } from '../../../../core/utils/request';
 import './styles.scss';
 
 type Paramstype = {
@@ -11,6 +12,12 @@ type Paramstype = {
 
 const ProductDetails = () => {
     const { productId } = useParams<Paramstype>();
+    const [product, setProducts] = useState<Product>();
+    useEffect(() => {
+        makeRequest({ url: `/products/${productId}` })
+            .then(response => setProducts(response.data))
+            .finally()
+    }, [productId])
 
     return (
         <div className="product-details-container">
@@ -22,12 +29,12 @@ const ProductDetails = () => {
                 <div className="row">
                     <div className="col-6 pr-5">
                         <div className="product-details-card text-center">
-                            <ProductImage className="product-details-image" />
+                            <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
                         </div>
                         <h1 className="product--details-name">
-                            Computador Desktop - Intel Core i7
+                            {product?.name}
                         </h1>
-                        <ProductPrice price="2.779,00" />
+                        {product?.price && (<ProductPrice price={product?.price} />)}
                     </div>
 
                     <div className="col-6 product-details-card">
@@ -35,9 +42,7 @@ const ProductDetails = () => {
                             Descrição do Produto
                         </h1>
                         <p className="product-description-text">
-                            daghdkagkdgajskdgakgsdhaskdgaskgdaksgdhsdgkjsdghaskdghas
-                            asdgadgshagsdhkjagshdkgsat7tagsdhaksdghaksdghakgsdhkagdh
-                            ashdagsdjakgsdhakgsdhakgdkaghdkgashdkjgyyuiosdaydasdusod
+                            {product?.description}
                         </p>
                     </div>
                 </div>
