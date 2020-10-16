@@ -1,8 +1,14 @@
 import React from 'react';
+import { Switch } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import './styles.scss';
 
-const Admin = () =>(
+const Admin = () => (
     <div>
-        <h1>Admin</h1>
+        <Navbar />
+        <Switch>
+
+        </Switch>
     </div>
 )
 
