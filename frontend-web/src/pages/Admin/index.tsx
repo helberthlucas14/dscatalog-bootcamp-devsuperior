@@ -1,15 +1,32 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import Categories from './components/Categories';
 import Navbar from './components/Navbar';
+import Products from './components/Products';
+import Users from './components/Users';
 import './styles.scss';
 
 const Admin = () => (
-    <div>
-        <Navbar />
-        <Switch>
+  <div className="admin-container">
+    <Navbar />
+    <div className="admin-content">
+      <Switch>
 
-        </Switch>
+        <Route path={"/admin/products"}>
+          <Products />
+        </Route>
+
+        <Route path={"/admin/categories"} >
+          <Categories />
+        </Route>
+
+        <Route path={"/admin/users"} >
+          <Users />
+        </Route>
+
+      </Switch>
     </div>
+  </div>
 )
 
 export default Admin;
