@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,13 +22,15 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idLong;
+	private Long id;
 	private String firstName;
 	private String lastName;
+	
+	@Column(unique = true)
 	private String email;
 	private String password;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role", 
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -36,21 +40,21 @@ public class User implements Serializable {
 
 	}
 
-	public User(Long idLong, String firstName, String lastName, String email, String password) {
+	public User(Long id, String firstName, String lastName, String email, String password) {
 		super();
-		this.idLong = idLong;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
 
-	public Long getIdLong() {
-		return idLong;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdLong(Long idLong) {
-		this.idLong = idLong;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -92,12 +96,13 @@ public class User implements Serializable {
 	public Set<Role> getRoles() {
 		return roles;
 	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idLong == null) ? 0 : idLong.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -110,10 +115,10 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (idLong == null) {
-			if (other.idLong != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!idLong.equals(other.idLong))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
