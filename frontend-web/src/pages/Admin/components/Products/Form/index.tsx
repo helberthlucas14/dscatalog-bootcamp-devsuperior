@@ -35,9 +35,10 @@ const Form = () => {
             imgUrl: 'https://imagens.canaltech.com.br/ofertas/o14327.1.jpg',
             categories: [{ id: formData.category }]
         }
-        makePrivateRequest({ url: '/products', method: 'POST', data: payload });
+        makePrivateRequest({ url: '/products', method: 'POST', data: payload })
+            .then(() => { setFormData({ name: '', category: '', price: '', description: '' }); 
+        });
     }
-
 
     return (
         <form onSubmit={handleSubmit}>

@@ -18,12 +18,13 @@ type LoginData = {
 
 const BASE_URL = 'http://localhost:8080';
 
-axios.interceptors.response.use((response) => {
+axios.interceptors.response.use(function (response) {
     return response;
-}, (error) => {
-    if(error.response.status === 401 ){
-        history.push('/admin');
+}, function (error) {
+    if (error.response.status === 401) {
+        history.push('/admin/auth/login');
     }
+    
     return Promise.reject(error);
 });
 
