@@ -4,6 +4,7 @@ import Categories from './components/Categories';
 import Navbar from './components/Navbar';
 import Products from './components/Products';
 import Users from './components/Users';
+import PrivateRoute from 'core/components/Routes/PrivateRoute';
 import './styles.scss';
 
 const Admin = () => (
@@ -12,17 +13,17 @@ const Admin = () => (
     <div className="admin-content">
       <Switch>
 
-        <Route path={"/admin/products"}>
+        <PrivateRoute path={"/admin/products"}>
           <Products />
-        </Route>
+        </PrivateRoute>
 
-        <Route path={"/admin/categories"} >
+        <PrivateRoute path={"/admin/categories"} >
           <Categories />
-        </Route>
+        </PrivateRoute>
 
-        <Route path={"/admin/users"} >
+        <PrivateRoute path={"/admin/users"} allowedRoutes={["ROLE_ADMIN"]} >
           <Users />
-        </Route>
+        </PrivateRoute>
 
       </Switch>
     </div>
