@@ -1,7 +1,9 @@
 import jwtDecode from "jwt-decode";
+import history from './history';
 
 export const CLIENT_ID = 'dscatalog';
 export const CLIENT_SECRET = 'dscatalog123';
+const dataName = 'authData';
 
 type LoginResponse = {
     access_token: string;
@@ -22,11 +24,11 @@ type AccesToken = {
 
 export const saveSessionData = (loginResponse: LoginResponse) => {
     console.log(loginResponse + 'save sessesion')
-    localStorage.setItem('authData', JSON.stringify(loginResponse));
+    localStorage.setItem(dataName, JSON.stringify(loginResponse));
 }
 
 export const getSessionData = () => {
-    const sessionData = localStorage.getItem('authData') ?? '{}'
+    const sessionData = localStorage.getItem(dataName) ?? '{}'
     const parsedSessionData = JSON.parse(sessionData);
 
     return parsedSessionData as LoginResponse;
@@ -61,4 +63,9 @@ export const isAllowedByRole = (routeRoles: Role[] = []) => {
     const { authorities } = getAccesTokenDecoded();
 
     return routeRoles.some((role) => authorities?.includes(role));
+}
+
+export const logout = () => {
+    localStorage.removeItem(dataName);
+    history.replace('/auth/login');
 }
