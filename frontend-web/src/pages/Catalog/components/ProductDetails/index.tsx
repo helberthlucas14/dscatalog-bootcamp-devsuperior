@@ -5,7 +5,7 @@ import ProductPrice from 'core/components/ProductPrice';
 import { Product } from 'core/types/Products';
 import { makeRequest } from 'core/utils/request';
 import ProductDescriptionLoader from '../Loaders/ProductDescriptionLoader';
-import ProductInfoLoader from '../Loaders/ProductInfoLoader';
+import ProductCardLoader from '../Loaders/ProductCardLoader';
 import './styles.scss';
 
 type Paramstype = {
@@ -34,7 +34,7 @@ const ProductDetails = () => {
                 </Link>
                 <div className="row">
                     <div className="col-6 pr-5">
-                        {isLoading ? <ProductInfoLoader /> : (
+                        {isLoading ? <ProductCardLoader /> : (
                             <>
                                 <div className="product-details-card text-center">
                                     <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
