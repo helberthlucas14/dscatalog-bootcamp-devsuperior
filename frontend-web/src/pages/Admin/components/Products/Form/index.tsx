@@ -26,7 +26,7 @@ const Form = () => {
     const history = useHistory();
     const { productId } = useParams<ParamsType>();
     const [isLoadingCategories, setIsLoadingCategories] = useState(false);
-    const [catetgories, setCategories] = useState<Category[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const isEditing = productId !== 'create';
     const formTitle = isEditing ? 'Editar prodduto' : 'cadastrar um produto';
 
@@ -48,7 +48,7 @@ const Form = () => {
         makeRequest({ url: `/categories` })
             .then(response => setCategories(response.data.content))
             .finally(() => setIsLoadingCategories(false));
-    }, [])
+    },[]);
 
 
     const onSubmit = (data: FormState) => {
@@ -98,7 +98,7 @@ const Form = () => {
                                 rules={{ required: true }}
                                 control={control}
                                 isLoading={isLoadingCategories}
-                                options={catetgories}
+                                options={categories}
                                 getOptionLabel={(option: Category) => option.name}
                                 getOptionValue={(option: Category) => String(option.id)}
                                 classNamePrefix="categories-select"
