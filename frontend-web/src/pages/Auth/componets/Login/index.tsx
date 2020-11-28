@@ -25,7 +25,6 @@ const Login = () => {
     const { from } = location.state || { from: { pathname: '/admin' } }
 
     const onSubmit = (data: FormState) => {
-        console.log(data)
 
         makeLogin(data)
             .then(response => {
