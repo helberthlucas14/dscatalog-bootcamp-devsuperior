@@ -6,7 +6,7 @@ type Props = {
 }
 
 const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(price)
+    return new Intl.NumberFormat('en', { minimumFractionDigits: 2 }).format(price)
 }
 
 const ProductPrice = ({ price }: Props) => (
