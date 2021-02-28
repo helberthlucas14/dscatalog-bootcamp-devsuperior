@@ -28,7 +28,7 @@ const Form = () => {
     const [isLoadingCategories, setIsLoadingCategories] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
     const isEditing = productId !== 'create';
-    const formTitle = isEditing ? 'Editar prodduto' : 'cadastrar um produto';
+    const formTitle = isEditing ? 'Editar produto' : 'cadastrar um produto';
 
     useEffect(() => {
         if (isEditing) {
